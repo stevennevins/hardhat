@@ -10,7 +10,7 @@ pragma solidity ^0.7.3;
 
 // importing both Sushiswap V1 and Uniswap V2 Router02 dependencies
 import "@uniswap/v2-periphery/contracts/interfaces/IUniswapV2Router02.sol";
-import {Keeper} from "./Keeper.sol";
+import {FlashBorrower} from "./FlashBorrower.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 

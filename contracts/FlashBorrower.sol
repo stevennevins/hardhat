@@ -1,7 +1,3 @@
-/**
- *Submitted for verification at Etherscan.io on 2021-01-25
-*/
-
 pragma solidity ^0.7.3;
 
 
@@ -22,7 +18,7 @@ interface IDistributor {
     function claim(address _to, uint256 _earningsToDate, uint256 _nonce, bytes memory _signature) external;
 }
 
-contract Keeper {
+contract FlashBorrower {
     address payable immutable owner;
 
     address constant borrowProxy = 0x82151CA501c81108d032C490E25f804787BEF3b8;
@@ -43,7 +39,7 @@ contract Keeper {
         _;
     }
     
-    constructor() public payable {
+    constructor(){
         owner = msg.sender;
     }
 
@@ -89,7 +85,9 @@ contract Keeper {
         (bool success, bytes memory retData) = to.delegatecall(data);
         require(success, string(retData));
     }
-    
+
+    receive() external payable { return; }
+
     fallback() external payable { return; }
 
 }

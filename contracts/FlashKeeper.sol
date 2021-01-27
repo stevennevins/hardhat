@@ -14,7 +14,7 @@ import {Keeper} from "./Keeper.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract FlashKeeper is Keeper {
+contract FlashKeeper is FlashBorrower {
 
     using SafeMath for uint256;
     IUniswapV2Router02 uniswapV2Router;
@@ -27,7 +27,7 @@ contract FlashKeeper is Keeper {
     /**
         Initialize deployment parameters
      */
-    constructor(IUniswapV2Router02 _uniswapV2Router) public {
+    constructor(IUniswapV2Router02 _uniswapV2Router) {
 
             // instantiate SushiswapV1 and UniswapV2 Router02
             uniswapV2Router = IUniswapV2Router02(address(_uniswapV2Router));

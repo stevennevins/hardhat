@@ -24,78 +24,13 @@ contract FlashKeeper is FlashBorrower {
     uint256 amountToTrade;
     uint256 tokensOut;
     
-    /**
-        Initialize deployment parameters
-     */
     constructor(IUniswapV2Router02 _uniswapV2Router) {
-
             // instantiate SushiswapV1 and UniswapV2 Router02
             uniswapV2Router = IUniswapV2Router02(address(_uniswapV2Router));
-
             // setting deadline to avoid scenario where miners hang onto it and execute at a more profitable time
             deadline = block.timestamp + 300; // 5 minutes
     }
     
-    /**
-        Mid-flashloan logic i.e. what you do with the temporarily acquired flash liquidity
-     */
-    function executeOperation(
-        address _reserve,
-        uint256 _amount,
-        uint256 _fee,
-        bytes calldata _params
-    )
-        external
-    {
-
-        // execute arbitrage strategy
-        try this.executeArbitrage() {
-        } catch Error(string memory) {
-            // Reverted with a reason string provided
-        } catch (bytes memory) {
-            // failing assertion, division by zero.. blah blah
-        }
-    }
-
-    /**
-        The specific cross protocol swaps that makes up your arb strategy
-        UniswapV2 -> SushiswapV1 example below
-     */
-    function executeArbitrage() public {
-
-        // Trade 1: Execute swap of Ether into designated ERC20 token on UniswapV2
-        try uniswapV2Router.swapETHForExactTokens{ 
-            value: amountToTrade 
-        }(
-            amountToTrade, 
-            getPathForETHToToken(daiTokenAddress), 
-            address(this), 
-            deadline
-        ){
-        } catch {
-            // error handling when arb failed due to trade 1
-        }
-        
-        // Re-checking prior to execution since the NodeJS bot that instantiated this contract would have checked already
-        uint256 tokenAmountInWEI = tokensOut.mul(1000000000000000000); //convert into Wei
-        uint256 estimatedETH = getEstimatedETHForToken(tokensOut, daiTokenAddress)[0]; // check how much ETH you'll get for x number of ERC20 token
-        
-        // grant uniswap / sushiswap access to your token, DAI used since we're swapping DAI back into ETH
-        dai.approve(address(uniswapV2Router), tokenAmountInWEI);
-
-        // Trade 2: Execute swap of the ERC20 token back into ETH on Sushiswap to complete the arb
-        try uniswapV2Router.swapExactTokensForETH (
-            tokenAmountInWEI, 
-            estimatedETH, 
-            getPathForTokenToETH(daiTokenAddress), 
-            address(this), 
-            deadline
-        ){
-        } catch {
-            // error handling when arb failed due to trade 2    
-        }
-    }
-
     /**
         sweep entire balance on the arb contract back to contract owner
      */

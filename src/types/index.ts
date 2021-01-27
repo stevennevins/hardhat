@@ -4,19 +4,15 @@
 export type { IERC20 } from "./IERC20";
 export type { IUniswapV2Router01 } from "./IUniswapV2Router01";
 export type { IUniswapV2Router02 } from "./IUniswapV2Router02";
-export type { FlashKeeper } from "./FlashKeeper";
-export type { IERC20 } from "./IERC20";
+export type { FlashBorrower } from "./FlashBorrower";
 export type { IDistributor } from "./IDistributor";
-export type { IERC20 } from "./IERC20";
-export type { Keeper } from "./Keeper";
 export type { LiquidityPool } from "./LiquidityPool";
+export type { FlashKeeper } from "./FlashKeeper";
 
 export { IERC20__factory } from "./factories/IERC20__factory";
 export { IUniswapV2Router01__factory } from "./factories/IUniswapV2Router01__factory";
 export { IUniswapV2Router02__factory } from "./factories/IUniswapV2Router02__factory";
-export { FlashKeeper__factory } from "./factories/FlashKeeper__factory";
-export { IERC20__factory } from "./factories/IERC20__factory";
+export { FlashBorrower__factory } from "./factories/FlashBorrower__factory";
 export { IDistributor__factory } from "./factories/IDistributor__factory";
-export { IERC20__factory } from "./factories/IERC20__factory";
-export { Keeper__factory } from "./factories/Keeper__factory";
 export { LiquidityPool__factory } from "./factories/LiquidityPool__factory";
+export { FlashKeeper__factory } from "./factories/FlashKeeper__factory";

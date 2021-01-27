@@ -8,8 +8,8 @@ const { deployContract } = waffle;
 
 describe("simulating a trade on uniswap", function () {
   let comp: IERC20;
-  const receiver = "0x829BD824B016326A401d083B33D092293333A830";
-  const sender = "0x9bc2f223026c252c8ef5f7f33f00f4bee21434b8";
+  const sender = "0x829BD824B016326A401d083B33D092293333A830";
+  const receiver = "0x9bc2f223026c252c8ef5f7f33f00f4bee21434b8";
   beforeEach(async () => {
     await network.provider.request({
       method: "hardhat_impersonateAccount",

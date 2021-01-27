@@ -1,5 +1,7 @@
 pragma solidity ^0.7.3;
 
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+
 
 interface LiquidityPool {
     function borrow(
@@ -7,11 +9,6 @@ interface LiquidityPool {
         uint256 _amount,
         bytes calldata _data
     ) external;
-}
-
-interface IERC20 {
-    function balanceOf(address account) external view returns (uint256);
-    function transfer(address recipient, uint256 amount) external returns (bool);
 }
 
 interface IDistributor {

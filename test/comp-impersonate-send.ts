@@ -1,15 +1,12 @@
-import { network, ethers, waffle } from "hardhat";
-import { Overrides, Wallet } from "ethers";
+import { network, ethers } from "hardhat";
 import { Signer } from "ethers";
 import { expect } from "chai";
 import { IERC20, IERC20__factory } from "../src/types";
 
-const { deployContract } = waffle;
-
-describe("simulating a trade on uniswap", function () {
+describe("comp balance impersonate and send", function () {
   let comp: IERC20;
-  const sender = "0x829BD824B016326A401d083B33D092293333A830";
-  const receiver = "0x9bc2f223026c252c8ef5f7f33f00f4bee21434b8";
+  const receiver = "0x829BD824B016326A401d083B33D092293333A830";
+  const sender = "0x9bc2f223026c252c8ef5f7f33f00f4bee21434b8";
   beforeEach(async () => {
     await network.provider.request({
       method: "hardhat_impersonateAccount",

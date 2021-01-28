@@ -28,8 +28,6 @@ interface FlashKeeperInterface extends ethers.utils.Interface {
     "claim(address,uint256,uint256,bytes)": FunctionFragment;
     "delegateCall(address,bytes)": FunctionFragment;
     "doBorrow(address[])": FunctionFragment;
-    "executeArbitrage()": FunctionFragment;
-    "executeOperation(address,uint256,uint256,bytes)": FunctionFragment;
     "getEstimatedETHForToken(uint256,address)": FunctionFragment;
     "withdrawTokens(address)": FunctionFragment;
   };
@@ -51,14 +49,6 @@ interface FlashKeeperInterface extends ethers.utils.Interface {
     values: [string, BytesLike]
   ): string;
   encodeFunctionData(functionFragment: "doBorrow", values: [string[]]): string;
-  encodeFunctionData(
-    functionFragment: "executeArbitrage",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "executeOperation",
-    values: [string, BigNumberish, BigNumberish, BytesLike]
-  ): string;
   encodeFunctionData(
     functionFragment: "getEstimatedETHForToken",
     values: [BigNumberish, string]
@@ -82,14 +72,6 @@ interface FlashKeeperInterface extends ethers.utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "doBorrow", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "executeArbitrage",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "executeOperation",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "getEstimatedETHForToken",
     data: BytesLike
@@ -170,26 +152,6 @@ export class FlashKeeper extends Contract {
       overrides?: PayableOverrides
     ): Promise<ContractTransaction>;
 
-    executeArbitrage(overrides?: Overrides): Promise<ContractTransaction>;
-
-    "executeArbitrage()"(overrides?: Overrides): Promise<ContractTransaction>;
-
-    executeOperation(
-      _reserve: string,
-      _amount: BigNumberish,
-      _fee: BigNumberish,
-      _params: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
-    "executeOperation(address,uint256,uint256,bytes)"(
-      _reserve: string,
-      _amount: BigNumberish,
-      _fee: BigNumberish,
-      _params: BytesLike,
-      overrides?: Overrides
-    ): Promise<ContractTransaction>;
-
     getEstimatedETHForToken(
       _tokenAmount: BigNumberish,
       ERC20Token: string,
@@ -267,26 +229,6 @@ export class FlashKeeper extends Contract {
     overrides?: PayableOverrides
   ): Promise<ContractTransaction>;
 
-  executeArbitrage(overrides?: Overrides): Promise<ContractTransaction>;
-
-  "executeArbitrage()"(overrides?: Overrides): Promise<ContractTransaction>;
-
-  executeOperation(
-    _reserve: string,
-    _amount: BigNumberish,
-    _fee: BigNumberish,
-    _params: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
-  "executeOperation(address,uint256,uint256,bytes)"(
-    _reserve: string,
-    _amount: BigNumberish,
-    _fee: BigNumberish,
-    _params: BytesLike,
-    overrides?: Overrides
-  ): Promise<ContractTransaction>;
-
   getEstimatedETHForToken(
     _tokenAmount: BigNumberish,
     ERC20Token: string,
@@ -353,26 +295,6 @@ export class FlashKeeper extends Contract {
 
     "doBorrow(address[])"(
       tokens: string[],
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    executeArbitrage(overrides?: CallOverrides): Promise<void>;
-
-    "executeArbitrage()"(overrides?: CallOverrides): Promise<void>;
-
-    executeOperation(
-      _reserve: string,
-      _amount: BigNumberish,
-      _fee: BigNumberish,
-      _params: BytesLike,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    "executeOperation(address,uint256,uint256,bytes)"(
-      _reserve: string,
-      _amount: BigNumberish,
-      _fee: BigNumberish,
-      _params: BytesLike,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -446,26 +368,6 @@ export class FlashKeeper extends Contract {
     "doBorrow(address[])"(
       tokens: string[],
       overrides?: PayableOverrides
-    ): Promise<BigNumber>;
-
-    executeArbitrage(overrides?: Overrides): Promise<BigNumber>;
-
-    "executeArbitrage()"(overrides?: Overrides): Promise<BigNumber>;
-
-    executeOperation(
-      _reserve: string,
-      _amount: BigNumberish,
-      _fee: BigNumberish,
-      _params: BytesLike,
-      overrides?: Overrides
-    ): Promise<BigNumber>;
-
-    "executeOperation(address,uint256,uint256,bytes)"(
-      _reserve: string,
-      _amount: BigNumberish,
-      _fee: BigNumberish,
-      _params: BytesLike,
-      overrides?: Overrides
     ): Promise<BigNumber>;
 
     getEstimatedETHForToken(
@@ -543,26 +445,6 @@ export class FlashKeeper extends Contract {
     "doBorrow(address[])"(
       tokens: string[],
       overrides?: PayableOverrides
-    ): Promise<PopulatedTransaction>;
-
-    executeArbitrage(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    "executeArbitrage()"(overrides?: Overrides): Promise<PopulatedTransaction>;
-
-    executeOperation(
-      _reserve: string,
-      _amount: BigNumberish,
-      _fee: BigNumberish,
-      _params: BytesLike,
-      overrides?: Overrides
-    ): Promise<PopulatedTransaction>;
-
-    "executeOperation(address,uint256,uint256,bytes)"(
-      _reserve: string,
-      _amount: BigNumberish,
-      _fee: BigNumberish,
-      _params: BytesLike,
-      overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
     getEstimatedETHForToken(
